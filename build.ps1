@@ -35,21 +35,35 @@ if ($answer -eq "y") {
 }
 
 # Delete old .7z file
-if (Test-Path $tempZip) { Remove-Item $tempZip -Force }
+if (Test-Path $tempZip) {
+    Remove-Item $tempZip -Force
+    Write-Host "Deleted old .7z build file." -ForegroundColor Gray
+}
 
 # Archive and Encrypt
 if ($answer -eq "y") {
     # OFFLINE BUILD: Include everything
     Write-Host "Creating OFFLINE .apbx (including all files)..." -ForegroundColor Green
+
+    # Zip it up, zip it good
     & 7z a $tempZip $sourceDir "-p$password" -mhe=on
+
+    # Delete the original playbook.conf from inside the zip
+    & 7z d $tempZip "playbook.conf" "-p$password"
+
+    # Rename the offline version to the standard name inside the zip
+    & 7z rn $tempZip "playbook-offline.conf" "playbook.conf" "-p$password"
 } else {
-    # ONLINE BUILD: Exclude the heavy offline installers
+    # ONLINE BUILD: Exclude the heavy offline installers and the playbook-offline.conf
     Write-Host "Creating ONLINE .apbx (excluding offline files)..." -ForegroundColor Yellow
-    & 7z a $tempZip $sourceDir "-p$password" -mhe=on "-x!Executables/OfflineApps"
+    & 7z a $tempZip $sourceDir "-p$password" -mhe=on "-x!Executables/OfflineApps" "-x!playbook-offline.conf"
 }
 
 # Delete old .apbx playbook file
-if (Test-Path $finalFile) { Remove-Item $finalFile -Force }
+if (Test-Path $finalFile) {
+    Remove-Item $finalFile -Force
+    Write-Host "Deleted old .apbx build file." -ForegroundColor Gray
+}
 
 # Rename to .apbx
 if (Test-Path $tempZip) {
