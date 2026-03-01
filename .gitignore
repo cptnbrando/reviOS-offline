@@ -1,5 +1,5 @@
 *.7z
 *.apbx
 
-/src/Executables/OfflineApps/*.exe
-/src/Executables/OfflineApps/*.xpi
+/src/Executables/Offline/*.exe
+/src/Executables/Offline/*.xpi

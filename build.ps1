@@ -17,7 +17,7 @@ $sourceDir = "./src/*"
 $tempZip = "revios.7z"
 $finalFile = "revios.apbx"
 $password = "malte"
-$testExe = "./src/Executables/OfflineApps/vc_redist.x64.exe"
+$testExe = "./src/Executables/Offline/vc_redist.x64.exe"
 
 Write-Host "Create offline .apbx? (y/n): " -ForegroundColor Cyan -NoNewline
 $answer = Read-Host
@@ -28,7 +28,7 @@ if ($answer -eq "y") {
     # Run install script if exe files are not present
     if (!(Test-Path $testExe)) {
         Write-Host "Offline exe files not downloaded, running download script" -ForegroundColor Green
-        . ./src/Executables/OfflineApps/getapps.ps1
+        . ./src/Executables/Offline/getapps.ps1
     } else {
         Write-Host "Offline exe files found, skipping download script" -ForegroundColor Green
     }
@@ -56,7 +56,7 @@ if ($answer -eq "y") {
 } else {
     # ONLINE BUILD: Exclude the heavy offline installers and the playbook-offline.conf
     Write-Host "Creating ONLINE .apbx (excluding offline files)..." -ForegroundColor Yellow
-    & 7z a $tempZip $sourceDir "-p$password" -mhe=on "-x!Executables/OfflineApps" "-x!playbook-offline.conf"
+    & 7z a $tempZip $sourceDir "-p$password" -mhe=on "-x!Executables/Offline" "-x!playbook-offline.conf"
 }
 
 # Delete old .apbx playbook file
