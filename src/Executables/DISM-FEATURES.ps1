@@ -29,7 +29,7 @@ $features = @(
     @{ Name = "Printing-Foundation-Features"; Bool = $false },
     @{ Name = "Printing-Foundation-InternetPrinting-Client"; Bool = $false },
     @{ Name = "WorkFolders-Client"; Bool = $false }
-	# @{ Name = "SmbDirect"; Bool = $false }
+	@{ Name = "SmbDirect"; Bool = $false }
 )
 foreach ($feature in $features) {
     Update-Feature -featureName $feature.Name -bool $feature.Bool
