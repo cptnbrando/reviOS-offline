@@ -13,7 +13,7 @@ actions:
   #   exeDir: true
   #   command: '.\UPDATE-APPX.ps1'
 
-  - !status: {status: 'Installing Brave from offline .exe', option: "browser-brave"}
+  - !status: {status: 'Installing downloaded Brave', option: "browser-brave"}
   - !run:
     exeDir: true
     exe: "Offline/BraveBrowserStandaloneSetup.exe"
@@ -39,7 +39,7 @@ actions:
     option: "browser-brave"
 
   # Firefox
-  - !status: {status: 'Installing Firefox from offline .exe', option: "browser-firefox"}
+  - !status: {status: 'Installing downloaded Firefox', option: "browser-firefox"}
   - !run:
     exeDir: true
     exe: "Offline/FirefoxBrowserStandaloneSetup.exe"
