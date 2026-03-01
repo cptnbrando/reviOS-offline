@@ -57,23 +57,15 @@ actions:
   - !run: {exe: "powercfg", args: "/setactive scheme_current"}
 
   - !writeStatus: {status: "Installing VCRedist"}
-  - !download: 
-    url: 'https://aka.ms/vs/17/release/vc_redist.x64.exe'
-    destination: "vc_redist.x64.exe"
-    overwrite: true
   - !run:
     exeDir: true
-    exe: "vc_redist.x64.exe"
+    exe: "Offline/vc_redist.x64.exe"
     args: '/quiet /norestart'
 
   - !writeStatus: {status: 'Installing Revision Tool'}
-  - !download: 
-    url: 'https://github.com/meetrevision/revision-tool/releases/latest/download/RevisionTool-Setup.exe'
-    destination: "RevisionTool-Setup.exe"
-    overwrite: true
   - !run:
     exeDir: true
-    exe: "RevisionTool-Setup.exe"
+    exe: "Offline/RevisionTool-Setup.exe"
     args: '/VERYSILENT /TASKS="desktopicon"'
     weight: 150
 

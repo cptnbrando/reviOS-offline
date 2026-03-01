@@ -13,30 +13,18 @@ actions:
   #   exeDir: true
   #   command: '.\UPDATE-APPX.ps1'
 
-  - !status: {status: 'Installing Brave', option: "browser-brave"}
-  - !download: 
-    option: "browser-brave"
-    url: 'https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetup.exe'
-    destination: "BraveBrowserStandaloneSetup.exe"
-    cpuArch: X64
-    package: 'brave'
+  - !status: {status: 'Installing Brave from offline .exe', option: "browser-brave"}
   - !run:
     exeDir: true
-    exe: "BraveBrowserStandaloneSetup.exe"
+    exe: "Offline/BraveBrowserStandaloneSetup.exe"
     args: "/silent /install"
     cpuArch: X64
     weight: 150
     option: "browser-brave"
 
-  - !download: 
-    option: "browser-brave"
-    url: 'https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetup.exe'
-    destination: "BraveBrowserStandaloneSetupArm64.exe"
-    cpuArch: Arm64
-    package: 'brave'
   - !run:
     exeDir: true
-    exe: "BraveBrowserStandaloneSetupArm64.exe"
+    exe: "Offline/BraveBrowserStandaloneSetupArm64.exe"
     args: "/silent /install"
     cpuArch: Arm64
     weight: 150
@@ -51,10 +39,19 @@ actions:
     option: "browser-brave"
 
   # Firefox
-  - !status: {status: 'Installing Firefox', option: "browser-firefox"}
-  - !software:
-    name: "Firefox"
-    source: chocolatey
-    option: "browser-firefox"
-    package: 'firefox'
+  - !status: {status: 'Installing Firefox from offline .exe', option: "browser-firefox"}
+  - !run:
+    exeDir: true
+    exe: "Offline/FirefoxBrowserStandaloneSetup.exe"
+    args: "/S"
+    cpuArch: X64
     weight: 150
+    option: "browser-firefox"
+
+  - !run:
+    exeDir: true
+    exe: "Offline/FirefoxBrowserStandaloneSetupArm64.exe"
+    args: "/S"
+    cpuArch: Arm64
+    weight: 150
+    option: "browser-firefox"

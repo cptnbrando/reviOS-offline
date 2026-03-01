@@ -3,11 +3,12 @@ $CurrentDir = $PSScriptRoot
 
 # Download list
 $Files = [ordered]@{
-    "uBlockOrigin.xpi"            = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
-    "RevisionTool-Setup.exe"      = "https://github.com/meetrevision/revision-tool/releases/latest/download/RevisionTool-Setup.exe"
-    "vc_redist.x64.exe"           = "https://aka.ms/vs/17/release/vc_redist.x64.exe"
-    "BraveBrowserStandaloneSetup.exe"  = "https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetup.exe"
-    "BraveBrowserStandaloneSetupArm64.exe" = "https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetupArm64.exe"
+    "RevisionTool-Setup.exe"                   =   "https://github.com/meetrevision/revision-tool/releases/latest/download/RevisionTool-Setup.exe"
+    "vc_redist.x64.exe"                        =   "https://aka.ms/vs/17/release/vc_redist.x64.exe"
+    "BraveBrowserStandaloneSetup.exe"          =   "https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetup.exe"
+    "BraveBrowserStandaloneSetupArm64.exe"     =   "https://github.com/brave/brave-browser/releases/latest/download/BraveBrowserStandaloneSetupArm64.exe"
+    "FirefoxBrowserStandaloneSetup.exe"        =   "https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US"
+    "FirefoxBrowserStandaloneSetupArm64.exe"   =   "https://download.mozilla.org/?product=firefox-latest-ssl&os=win64-aarch64&lang=en-US"
 }
 
 Write-Host "Target Directory: $CurrentDir" -ForegroundColor Cyan

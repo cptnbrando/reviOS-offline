@@ -2,4 +2,3 @@
 *.apbx
 
 /src/Executables/Offline/*.exe
-/src/Executables/Offline/*.xpi
