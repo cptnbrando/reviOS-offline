@@ -46,27 +46,27 @@ if ($answer -eq "y") {
     Write-Host "Creating OFFLINE .apbx (including all files)..." -ForegroundColor Green
 
     # Zip it up, zip it good
-    & 7z a $tempZip $sourceDir "-p$password" -mhe=on
+    & 7z a -tzip -mm=Deflate -mx=5 $tempZip $sourceDir "-p$password"
 
     # Replace the online start.yml
-    & 7z d $tempZip "Configuration/Tasks/start.yml" "-p$password"
-    & 7z rn $tempZip "Configuration/Tasks/start-offline.yml" "Configuration/Tasks/start.yml" "-p$password"
+    & 7z d -tzip $tempZip "Configuration/Tasks/start.yml" "-p$password"
+    & 7z rn -tzip $tempZip "Configuration/Tasks/start-offline.yml" "Configuration/Tasks/start.yml" "-p$password"
 
     # Replace the online software.yml
-    & 7z d $tempZip "Configuration/Tasks/software.yml" "-p$password"
-    & 7z rn $tempZip "Configuration/Tasks/software-offline.yml" "Configuration/Tasks/software.yml" "-p$password"
+    & 7z d -tzip $tempZip "Configuration/Tasks/software.yml" "-p$password"
+    & 7z rn -tzip $tempZip "Configuration/Tasks/software-offline.yml" "Configuration/Tasks/software.yml" "-p$password"
 
     # Replace the online UPDATE-APPX.ps1
-    & 7z d $tempZip "Executables/UPDATE-APPX.ps1" "-p$password"
-    & 7z rn $tempZip "Executables/UPDATE-APPX-offline.ps1" "Executables/UPDATE-APPX.ps1" "-p$password"
+    & 7z d -tzip $tempZip "Executables/UPDATE-APPX.ps1" "-p$password"
+    & 7z rn -tzip $tempZip "Executables/UPDATE-APPX-offline.ps1" "Executables/UPDATE-APPX.ps1" "-p$password"
 
     # Replace the online playbook.conf
-    & 7z d $tempZip "playbook.conf" "-p$password"
-    & 7z rn $tempZip "playbook-offline.conf" "playbook.conf" "-p$password"
+    & 7z d -tzip $tempZip "playbook.conf" "-p$password"
+    & 7z rn -tzip $tempZip "playbook-offline.conf" "playbook.conf" "-p$password"
 } else {
     # ONLINE BUILD: Exclude the offline installers and the -offline files
     Write-Host "Creating ONLINE .apbx (excluding offline files)..." -ForegroundColor Yellow
-    & 7z a $tempZip $sourceDir "-p$password" -mhe=on "-x!Executables/Offline" "-x!*-offline.conf" "-x!Executables/*-offline.ps1" "-x!Configuration/Tasks/*-offline.yml"
+    & 7z a -tzip -mm=Deflate -mx=5 $tempZip $sourceDir "-p$password" "-x!Executables/Offline" "-x!*-offline.conf" "-x!Executables/*-offline.ps1" "-x!Configuration/Tasks/*-offline.yml"
 }
 
 # Delete old .apbx playbook file
