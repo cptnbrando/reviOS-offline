@@ -50,34 +50,34 @@ actions:
     option: "remove-appx-photos"
     weight: 150
 
-  - !cmd:
-    exeDir: true
-    command: 'robocopy "Wallpapers" "%systemroot%\Web\Wallpaper\MeetRevision\v2" /E /PURGE /IM /IT /NP'
-    ignoreErrors: true
+  # - !cmd:
+  #   exeDir: true
+  #   command: 'robocopy "Wallpapers" "%systemroot%\Web\Wallpaper\MeetRevision\v2" /E /PURGE /IM /IT /NP'
+  #   ignoreErrors: true
 
-  - !powerShell:
-    command: '.\WALLPAPER.ps1 -Mode Desktop -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\desktop.jpg'
-    exeDir: true
-    runas: currentUserElevated
-    option: "configure-wallpaper"
-    weight: 45
+  # - !powerShell:
+  #   command: '.\WALLPAPER.ps1 -Mode Desktop -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\desktop.jpg'
+  #   exeDir: true
+  #   runas: currentUserElevated
+  #   option: "configure-wallpaper"
+  #   weight: 45
 
-  - !powerShell: 
-    command: '.\WALLPAPER.ps1 -Mode LockScreen -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\lockscreen.jpg'
-    exeDir: true
-    runas: currentUserElevated
-    option: "configure-wallpaper"
-    weight: 45
+  # - !powerShell: 
+  #   command: '.\WALLPAPER.ps1 -Mode LockScreen -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\lockscreen.jpg'
+  #   exeDir: true
+  #   runas: currentUserElevated
+  #   option: "configure-wallpaper"
+  #   weight: 45
 
-  - !powerShell:
-    command: 'Copy-Item -Path .\WALLPAPER.ps1 -Destination "$env:systemroot\Web\Wallpaper\MeetRevision" -Force'
-    exeDir: true
-    option: "configure-wallpaper"
+  # - !powerShell:
+  #   command: 'Copy-Item -Path .\WALLPAPER.ps1 -Destination "$env:systemroot\Web\Wallpaper\MeetRevision" -Force'
+  #   exeDir: true
+  #   option: "configure-wallpaper"
   
-  - !powerShell:
-    command: 'Copy-Item -Path .\WallpaperStartup.cmd -Destination "$env:systemroot\Web\Wallpaper\MeetRevision" -Force'
-    exeDir: true
-    option: "configure-wallpaper"
+  # - !powerShell:
+  #   command: 'Copy-Item -Path .\WallpaperStartup.cmd -Destination "$env:systemroot\Web\Wallpaper\MeetRevision" -Force'
+  #   exeDir: true
+  #   option: "configure-wallpaper"
 
   # === Themes
 
@@ -88,19 +88,19 @@ actions:
     option: "!configure-wallpaper"
     options: ["configure-darkmode"]
 
-  - !powerShell:
-    command: ".\\Set-Theme.ps1 -New @{ WallpaperPath = (Join-Path $env:SystemRoot 'Web\\Wallpaper\\MeetRevision\\v2\\desktop.jpg'); ThemeExportPath = (Join-Path $env:SystemRoot 'Resources\\Themes\\revi.theme'); SystemMode = 'Light'; AppMode = 'Light' }"
-    exeDir: true
-    runas: currentUserElevated
-    option: "!configure-darkmode"
-    options: ["configure-wallpaper"]
+  # - !powerShell:
+  #   command: ".\\Set-Theme.ps1 -New @{ WallpaperPath = (Join-Path $env:SystemRoot 'Web\\Wallpaper\\MeetRevision\\v2\\desktop.jpg'); ThemeExportPath = (Join-Path $env:SystemRoot 'Resources\\Themes\\revi.theme'); SystemMode = 'Light'; AppMode = 'Light' }"
+  #   exeDir: true
+  #   runas: currentUserElevated
+  #   option: "!configure-darkmode"
+  #   options: ["configure-wallpaper"]
 
-  - !powerShell:
-    command: ".\\Set-Theme.ps1 -New @{ WallpaperPath = (Join-Path $env:SystemRoot 'Web\\Wallpaper\\MeetRevision\\v2\\desktop.jpg'); ThemeExportPath = (Join-Path $env:SystemRoot 'Resources\\Themes\\revi.theme'); SystemMode = 'Dark'; AppMode = 'Dark' }"
-    exeDir: true
-    runas: currentUserElevated
-    option: "configure-darkmode"
-    options: ["configure-wallpaper"]
+  # - !powerShell:
+  #   command: ".\\Set-Theme.ps1 -New @{ WallpaperPath = (Join-Path $env:SystemRoot 'Web\\Wallpaper\\MeetRevision\\v2\\desktop.jpg'); ThemeExportPath = (Join-Path $env:SystemRoot 'Resources\\Themes\\revi.theme'); SystemMode = 'Dark'; AppMode = 'Dark' }"
+  #   exeDir: true
+  #   runas: currentUserElevated
+  #   option: "configure-darkmode"
+  #   options: ["configure-wallpaper"]
 
 
   # Still necessary to set for W10
@@ -111,13 +111,13 @@ actions:
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize', value: 'SystemUsesLightTheme', type: REG_DWORD, data: '1', option: "!configure-darkmode", weight: 50}
 
 
-  - !registryValue: 
-    path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
-    value: 'RevisionWallpaperStartup'
-    type: REG_SZ
-    oobe: only
-    data: 'cmd /c "%SystemRoot%\Web\Wallpaper\MeetRevision\WallpaperStartup.cmd"'
-    option: "configure-wallpaper"
+  # - !registryValue: 
+  #   path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce'
+  #   value: 'RevisionWallpaperStartup'
+  #   type: REG_SZ
+  #   oobe: only
+  #   data: 'cmd /c "%SystemRoot%\Web\Wallpaper\MeetRevision\WallpaperStartup.cmd"'
+  #   option: "configure-wallpaper"
     
   # Necessary to refresh start menu entries etc.
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
